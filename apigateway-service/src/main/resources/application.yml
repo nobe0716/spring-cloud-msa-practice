@@ -24,5 +24,15 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
+            - Method=GET,POST
           filters:
             - RewritePath=/user-service(?<segment>/?.*), $\{segment}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,beans,httptrace
+  trace:
+    http:
+      enabled: true
