@@ -4,13 +4,13 @@ server:
 spring:
   application:
     name: config-service
-
+  profile:
+    active: native
   cloud:
     config:
+      native:
+        search-locations: file://${user.home}/IdeaProjects/cop/spring-cloud-msa-config
       server:
         git:
-          uri: file://${user.home}/IdeaProjects/cop/cop-springcloudmsa-config
-#          uri: file://${user.home}/IdeaProjects/cop/multi-modules
-#          search-paths: ./conf
-#          default-label: main
-
+          uri: https://github.com/nobe0716/spring-cloud-msa-config
+          default-label: main
