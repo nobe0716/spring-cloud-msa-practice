@@ -1,0 +1,10 @@
+token:
+  expiration_time: 864000000
+  secret: user_token
+
+gateway:
+  ip: 127.0.0.1
+  port: 8000
+
+greeting:
+  message: Welcome message from spring cloud config
