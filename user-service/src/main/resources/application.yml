@@ -24,3 +24,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: health, refresh, beans
