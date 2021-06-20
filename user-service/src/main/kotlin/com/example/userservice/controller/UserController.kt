@@ -7,6 +7,7 @@ import com.example.userservice.vo.RequestUser
 import com.example.userservice.vo.ResponseUser
 import org.modelmapper.ModelMapper
 import org.modelmapper.convention.MatchingStrategies
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -31,7 +32,10 @@ class UserController(val userServiceImpl: UserService, val greeting: Greeting) {
     }
 
     @GetMapping("/health_check")
-    fun status(): String {
-        return String.format("It's working in User Service")
+    fun status(@Value("\${token.expiration_time}") expiration: String, @Value("\${token.secret}") secret: String): String {
+        return """
+            It's working in User Service
+            Token info - expiration: $expiration and secret: $secret
+        """.trimIndent()
     }
 }
