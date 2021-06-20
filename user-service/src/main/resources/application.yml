@@ -27,6 +27,6 @@ eureka:
 
 management:
   endpoints:
-    jmx:
+    web:
       exposure:
-        include: health, refresh, beans
+        include: refresh,health,beans
