@@ -27,6 +27,13 @@ spring:
             - Method=GET,POST
           filters:
             - RewritePath=/user-service(?<segment>/?.*), $\{segment}
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE
+          predicates:
+            - Path=/catalog-service/**
+            - Method=GET,POST
+          filters:
+            - RewritePath=/user-service(?<segment>/?.*), $\{segment}
 
 management:
   endpoints:
