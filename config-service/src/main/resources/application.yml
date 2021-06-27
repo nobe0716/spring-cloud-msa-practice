@@ -8,9 +8,10 @@ spring:
     active: native
   cloud:
     config:
-      native:
-        search-locations: file://${user.home}/IdeaProjects/cop/spring-cloud-msa-config
+#      native:
+#        search-locations: file://${user.home}/IdeaProjects/cop/multi-modules
       server:
         git:
-          uri: https://github.com/nobe0716/spring-cloud-msa-config
+          uri: https://github.com/nobe0716/spring-cloud-msa-practice
           default-label: main
+          search-paths: conf
