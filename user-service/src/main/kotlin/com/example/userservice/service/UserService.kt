@@ -6,5 +6,5 @@ import com.example.userservice.jpa.UserEntity
 interface UserService {
     fun createUser(userDto: UserDto): UserDto
     fun getUserById(userId: String): UserDto?
-    fun getUserByAll(): MutableIterable<UserEntity?>
+    fun getUserByAll(): MutableIterable<UserEntity>
 }

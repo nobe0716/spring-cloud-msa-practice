@@ -23,7 +23,7 @@ class UserServiceImpl(val userRepository: UserRepository, val bCryptPasswordEnco
         return modelMapper.map(userEntity, UserDto::class.java)
     }
 
-    override fun getUserByAll(): MutableIterable<UserEntity?> {
+    override fun getUserByAll(): MutableIterable<UserEntity> {
         return userRepository.findAll()
     }
 
@@ -33,7 +33,7 @@ class UserServiceImpl(val userRepository: UserRepository, val bCryptPasswordEnco
         val userDto = userRepository.findByUserId(userId)
             .map { modelMapper.map(it, UserDto::class.java) }
             .orElseThrow { UserNotFoundException(userId) }
-        var orders = ArrayList<ResponseOrder>()
+        val orders = ArrayList<ResponseOrder>()
         userDto.orders = orders
         return userDto
     }
