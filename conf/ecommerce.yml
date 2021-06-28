@@ -7,4 +7,4 @@ gateway:
   port: 8000
 
 greeting:
-  message: Welcome message from spring cloud config
+  message: Welcome message from spring cloud config - updated test
