@@ -28,6 +28,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.modelmapper:modelmapper:2.3.8")
     runtimeOnly("com.h2database:h2")

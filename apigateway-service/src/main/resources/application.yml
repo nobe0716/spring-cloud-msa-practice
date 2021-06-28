@@ -41,11 +41,16 @@ spring:
             - Method=GET,POST
           filters:
             - RewritePath=/order-service(?<segment>/?.*), $\{segment}
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 management:
   endpoints:
     web:
       exposure:
-        include: refresh,health,beans,httptrace
+        include: refresh,health,beans,httptrace,busrefresh
   trace:
     http:
       enabled: true
