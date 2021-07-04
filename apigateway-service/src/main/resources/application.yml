@@ -1,5 +1,11 @@
 server:
   port: 8000
+  tomcat:
+    accesslog:
+      enabled: true
+  jetty:
+    accesslog:
+      enabled: true
 eureka:
   client:
     register-with-eureka: true
@@ -23,9 +29,26 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/**
-            - Method=GET,POST
+            - Path=/user-service/login
+            - Method=POST
           filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service(?<segment>/?.*), $\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service(?<segment>/?.*), $\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
             - RewritePath=/user-service(?<segment>/?.*), $\{segment}
         - id: catalog-service
           uri: lb://CATALOG-SERVICE

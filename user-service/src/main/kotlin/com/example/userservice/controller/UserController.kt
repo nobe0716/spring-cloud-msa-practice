@@ -2,7 +2,6 @@ package com.example.userservice.controller
 
 import com.example.userservice.dto.UserDto
 import com.example.userservice.service.UserService
-import com.example.userservice.vo.Greeting
 import com.example.userservice.vo.RequestUser
 import com.example.userservice.vo.ResponseUser
 import org.modelmapper.ModelMapper
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/")
-class UserController(val userServiceImpl: UserService, val greeting: Greeting, val environment: Environment) {
-    @GetMapping("/welcome")
+class UserController(val userServiceImpl: UserService, val environment: Environment) {
+    @GetMapping("/welcome", "/")
     fun welcome(): String {
-        return greeting.message
+        return "hello from UserService"
     }
 
     @PostMapping("/users")

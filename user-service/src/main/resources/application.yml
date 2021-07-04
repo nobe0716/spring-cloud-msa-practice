@@ -1,6 +1,11 @@
 server:
   port: 8010
-
+  tomcat:
+    accesslog:
+      enabled: true
+  jetty:
+    accesslog:
+      enabled: true
 
 #greeting:
 #  message: Welcome to Simple E-Commerce.
@@ -39,5 +44,6 @@ management:
         include: refresh,health,beans,httptrace,busrefresh
 
 logging:
-  level:
-    com.example.userservice: DEBUG
+  level.com.example.userservice: DEBUG
+  level.org.apache.tomcat: DEBUG
+  level.org.apache.catalina: DEBUG
