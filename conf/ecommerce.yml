@@ -1,6 +1,6 @@
 token:
   expiration_time: 864000000
-  secret: user_token_ecommerce
+  secret: jwt_secret_token_spring_cloud_msa
 
 gateway:
   ip: 127.0.0.1
