@@ -50,6 +50,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service(?<segment>/?.*), $\{segment}
+            - AuthorizationHeaderFilter
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
@@ -77,3 +78,7 @@ management:
   trace:
     http:
       enabled: true
+
+token:
+  expiration_time: 86_400_000
+  secret: jwt_secret_token_spring_cloud_msa

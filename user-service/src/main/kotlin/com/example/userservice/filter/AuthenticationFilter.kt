@@ -6,7 +6,6 @@ import com.example.userservice.vo.RequestLogin
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import org.apache.commons.codec.binary.Base64
 import org.springframework.core.env.Environment
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -45,11 +44,10 @@ class AuthenticationFilter(
         val user: User = authResult?.principal as User
         val userDetails = userService.getUserDetailsByEmail(user.username)
 
-        val base64EncodedSecretKey = Base64.encodeBase64(env.getProperty("token.secret")!!.toByteArray())
         val token: String = Jwts.builder()
             .setSubject(userDetails.userId)
             .setExpiration(Date(System.currentTimeMillis() + env.getProperty("token.expiration_time")!!.toLong()))
-            .signWith(SignatureAlgorithm.HS256, base64EncodedSecretKey)
+            .signWith(SignatureAlgorithm.HS256, env.getProperty("token.secret")!!.toByteArray())
             .compact()
         response?.addHeader("token", token)
         response?.addHeader("userId", userDetails.userId)
