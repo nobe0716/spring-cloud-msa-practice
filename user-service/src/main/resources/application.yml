@@ -7,9 +7,6 @@ server:
     accesslog:
       enabled: true
 
-#greeting:
-#  message: Welcome to Simple E-Commerce.
-
 spring:
   application:
     name: user-service
@@ -47,3 +44,7 @@ logging:
   level.com.example.userservice: DEBUG
   level.org.apache.tomcat: DEBUG
   level.org.apache.catalina: DEBUG
+
+token:
+  expiration_time: 86_400_000
+  secret: user_token

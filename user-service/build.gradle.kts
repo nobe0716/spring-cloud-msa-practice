@@ -29,6 +29,12 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+    // jwt
+    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+    runtimeOnly( "io.jsonwebtoken:jjwt-impl:0.11.2")
+    runtimeOnly("org.bouncycastle:bcprov-jdk15on:1.60")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2") // or 'io.jsonwebtoken:jjwt-gson:0.11.2' for gson
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.modelmapper:modelmapper:2.3.8")
     runtimeOnly("com.h2database:h2")
