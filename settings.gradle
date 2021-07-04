@@ -1,4 +1,4 @@
-rootProject.name = 'multi-modules'
+rootProject.name = 'springcloud-msa'
 include 'config-service'
 include 'discovery-service'
 include 'apigateway-service'
