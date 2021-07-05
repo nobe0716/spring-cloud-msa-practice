@@ -16,7 +16,7 @@ eureka:
 
 spring:
   application:
-    name: apigateway-service
+    name: ecommerce
   cloud:
     gateway:
       default-filters:
@@ -78,7 +78,3 @@ management:
   trace:
     http:
       enabled: true
-
-token:
-  expiration_time: 86_400_000
-  secret: jwt_secret_token_spring_cloud_msa
