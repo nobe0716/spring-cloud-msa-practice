@@ -18,7 +18,7 @@ class WebSecurity(val userService: UserService, val bCryptPasswordEncoder: BCryp
         http?.let {
             it.csrf().disable()
                 .authorizeRequests().antMatchers("/users/**")
-                .hasIpAddress("192.168.0.10")
+                .hasIpAddress("192.168.0.0/16")
                 .and()
                 .addFilter(getAuthenticationFilter())
             it.headers().frameOptions().disable()
