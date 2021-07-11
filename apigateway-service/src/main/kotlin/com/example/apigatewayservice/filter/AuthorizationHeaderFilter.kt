@@ -33,7 +33,8 @@ class AuthorizationHeaderFilter(val env: Environment) : AbstractGatewayFilterFac
             if(!isJwtValid(jwt)) {
                 onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED)
             }
-            val mutableList = request.headers["token"]
+            val token = request.headers["token"]
+            log.debug("{}", token)
             chain.filter(exchange)
         }
     }

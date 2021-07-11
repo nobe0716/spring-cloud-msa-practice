@@ -1,28 +1,25 @@
 package com.example.userservice.service
 
+import com.example.userservice.client.OrderServiceClient
 import com.example.userservice.dto.UserDto
 import com.example.userservice.exception.UserNotFoundException
 import com.example.userservice.jpa.UserEntity
 import com.example.userservice.repository.UserRepository
-import com.example.userservice.vo.ResponseOrder
 import org.modelmapper.ModelMapper
 import org.modelmapper.convention.MatchingStrategies
-import org.springframework.core.ParameterizedTypeReference
 import org.springframework.core.env.Environment
-import org.springframework.http.HttpMethod
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.web.client.RestTemplate
 import java.util.*
 
 @Service
 class UserServiceImpl(
     val userRepository: UserRepository,
     val bCryptPasswordEncoder: BCryptPasswordEncoder,
-    val restTemplate: RestTemplate,
+    val orderServiceClient: OrderServiceClient,
     val env: Environment
 ) : UserService {
     override fun createUser(userDto: UserDto): UserDto {
@@ -46,9 +43,7 @@ class UserServiceImpl(
             .map { modelMapper.map(it, UserDto::class.java) }
             .orElseThrow { UserNotFoundException(userId) }
 
-        val orderUrl = "${env.getProperty("order_service.url")}/${userId}/orders"
-        val entity = restTemplate.exchange(orderUrl, HttpMethod.GET, null, object : ParameterizedTypeReference<List<ResponseOrder>>() {})
-        val orders = entity.body
+        val orders = orderServiceClient.getOrders(userId)
         userDto.orders = orders
         return userDto
     }
