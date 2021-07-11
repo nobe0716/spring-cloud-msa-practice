@@ -42,6 +42,7 @@ management:
 
 logging:
   level.com.example.userservice: DEBUG
+  level.com.example.userservice.client: DEBUG
   level.org.apache.tomcat: DEBUG
   level.org.apache.catalina: DEBUG
 
