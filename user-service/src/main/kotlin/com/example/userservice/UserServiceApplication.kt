@@ -1,6 +1,8 @@
 package com.example.userservice
 
+import com.example.userservice.error.FeignErrorDecoder
 import feign.Logger
+import feign.codec.ErrorDecoder
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient
@@ -26,6 +28,11 @@ class UserServiceApplication {
     @Bean
     fun feignLoggerLevel(): Logger.Level {
         return Logger.Level.FULL;
+    }
+
+    @Bean
+    fun feignErrorDecoder(): ErrorDecoder {
+        return FeignErrorDecoder()
     }
 }
 

@@ -1,10 +1,12 @@
 package com.example.userservice.service
 
+import com.example.userservice.Log
 import com.example.userservice.client.OrderServiceClient
 import com.example.userservice.dto.UserDto
 import com.example.userservice.exception.UserNotFoundException
 import com.example.userservice.jpa.UserEntity
 import com.example.userservice.repository.UserRepository
+import feign.FeignException
 import org.modelmapper.ModelMapper
 import org.modelmapper.convention.MatchingStrategies
 import org.springframework.core.env.Environment
@@ -22,6 +24,8 @@ class UserServiceImpl(
     val orderServiceClient: OrderServiceClient,
     val env: Environment
 ) : UserService {
+    companion object : Log
+
     override fun createUser(userDto: UserDto): UserDto {
         userDto.userId = UUID.randomUUID().toString()
         val modelMapper = ModelMapper()
@@ -43,8 +47,12 @@ class UserServiceImpl(
             .map { modelMapper.map(it, UserDto::class.java) }
             .orElseThrow { UserNotFoundException(userId) }
 
-        val orders = orderServiceClient.getOrders(userId)
-        userDto.orders = orders
+        try {
+            val orders = orderServiceClient.getOrders(userId)
+            userDto.orders = orders
+        } catch (e: FeignException) {
+            log.error("", e)
+        }
         return userDto
     }
 
