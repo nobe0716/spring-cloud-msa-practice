@@ -16,6 +16,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     // jwt
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("javax.xml.bind:jaxb-api:2.1")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")

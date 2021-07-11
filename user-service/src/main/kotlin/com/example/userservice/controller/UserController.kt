@@ -4,6 +4,7 @@ import com.example.userservice.dto.UserDto
 import com.example.userservice.service.UserService
 import com.example.userservice.vo.RequestUser
 import com.example.userservice.vo.ResponseUser
+import io.micrometer.core.annotation.Timed
 import org.modelmapper.ModelMapper
 import org.modelmapper.convention.MatchingStrategies
 import org.springframework.core.env.Environment
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/")
 class UserController(val userServiceImpl: UserService, val environment: Environment) {
+
     @GetMapping("/welcome", "/")
+    @Timed(value = "users.welcome", longTask = true)
     fun welcome(): String {
         return "hello from UserService"
     }
