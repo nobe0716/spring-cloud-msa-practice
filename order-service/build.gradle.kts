@@ -16,7 +16,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("io.micrometer:micrometer-registry-prometheus")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("org.springframework.kafka:spring-kafka")
     implementation("org.modelmapper:modelmapper:2.3.8")
+    implementation("mysql:mysql-connector-java:8.0.25")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

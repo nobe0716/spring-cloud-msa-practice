@@ -2,6 +2,7 @@ package com.example.orderservice.controller
 
 import com.example.orderservice.Log
 import com.example.orderservice.dto.OrderDto
+import com.example.orderservice.messagequeue.KafkaProducer
 import com.example.orderservice.service.OrderService
 import com.example.orderservice.vo.RequestOrder
 import com.example.orderservice.vo.ResponseOrder
@@ -12,7 +13,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class OrderController(val environment: Environment, val orderService: OrderService) {
+class OrderController(val environment: Environment, val orderService: OrderService, val kafkaProducer: KafkaProducer) {
     companion object : Log
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -23,6 +24,8 @@ class OrderController(val environment: Environment, val orderService: OrderServi
         var orderDto: OrderDto = mapper.map(requestOrder, OrderDto::class.java)
         orderDto.userId = userId
         orderDto = orderService.createOrder(orderDto)
+
+        kafkaProducer.send("example-catalog-topic", orderDto)
         return mapper.map(orderDto, ResponseOrder::class.java)
     }
 
