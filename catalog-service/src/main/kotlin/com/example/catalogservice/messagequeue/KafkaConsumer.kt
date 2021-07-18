@@ -12,7 +12,7 @@ class KafkaConsumer(val catalogRepository: CatalogRepository) {
 
     private val objectMapper = ObjectMapper()
 
-    @KafkaListener(topics = ["example-catalog-topic"])
+    @KafkaListener(groupId = "update.qty", topics = ["example-catalog-topic"])
     fun updateQty(kafkaMessage: String) {
         log.info("kafka Message: {}", kafkaMessage)
 //        Map<String, Object> map = new HashMap<>()
