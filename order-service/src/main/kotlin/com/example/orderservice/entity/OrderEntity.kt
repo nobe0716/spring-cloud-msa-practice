@@ -1,6 +1,5 @@
 package com.example.orderservice.entity
 
-import org.hibernate.annotations.ColumnDefault
 import java.util.*
 import javax.persistence.*
 
@@ -29,8 +28,7 @@ class OrderEntity {
     @Column(nullable = false, unique = true)
     var orderId: String? = null
 
-    @Basic(optional = false)
-    @Column(nullable = false, updatable = false, insertable = false)
+    @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     var createdAt: Date? = null
 }
