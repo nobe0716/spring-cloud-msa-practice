@@ -11,7 +11,7 @@ class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @Column(nullable = false, length = 120, unique = true)
+    @Column(nullable = false, length = 120)
     var productId: String? = null
 
     @Column(nullable = false)
@@ -29,7 +29,8 @@ class OrderEntity {
     @Column(nullable = false, unique = true)
     var orderId: String? = null
 
+    @Basic(optional = false)
     @Column(nullable = false, updatable = false, insertable = false)
-    @ColumnDefault(value = "CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
     var createdAt: Date? = null
 }

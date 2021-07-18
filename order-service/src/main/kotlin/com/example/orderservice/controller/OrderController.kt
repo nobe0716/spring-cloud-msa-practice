@@ -11,6 +11,7 @@ import org.modelmapper.convention.MatchingStrategies
 import org.springframework.core.env.Environment
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 class OrderController(val environment: Environment, val orderService: OrderService, val kafkaProducer: KafkaProducer) {
@@ -23,7 +24,12 @@ class OrderController(val environment: Environment, val orderService: OrderServi
         mapper.configuration.matchingStrategy = MatchingStrategies.STRICT
         var orderDto: OrderDto = mapper.map(requestOrder, OrderDto::class.java)
         orderDto.userId = userId
-        orderDto = orderService.createOrder(orderDto)
+
+        // JPA
+//        orderDto = orderService.createOrder(orderDto)
+
+        orderDto.orderId = UUID.randomUUID().toString()
+        orderDto.totalPrice = requestOrder.qty!! * requestOrder.unitPrice!!
 
         kafkaProducer.send("example-catalog-topic", orderDto)
         return mapper.map(orderDto, ResponseOrder::class.java)
