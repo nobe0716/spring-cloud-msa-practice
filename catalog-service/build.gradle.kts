@@ -14,6 +14,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("org.springframework.kafka:spring-kafka")
     implementation("org.modelmapper:modelmapper:2.3.8")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
